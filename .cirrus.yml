@@ -1,0 +1,33 @@
+env:
+  MANIFEST_URL: "https://github.com/SHRP/manifest.git"
+  MANIFEST_BRANCH: "shrp-12.1"
+  DEVICE_TREE_URL: "https://github.com/AnGgIt88/device_xiaomi_rosy-twrp"
+  DEVICE_TREE_BRANCH: "android-9.0"
+  DEVICE_PATH: "device/xiaomi/rosy"
+  DEVICE_NAME: "rosy"
+  MAKEFILE_NAME: "twrp_rosy"
+  BUILD_TARGET: "recovery"
+  WORKDIR: "/tmp"
+  CIRRUS_CLONE_DEPTH: "1"
+
+task:
+  name: "Setting Up, Syncing, Building and Uploading"
+  only_if: $CIRRUS_REPO_OWNER == 'AnGgIt88'
+  timeout_in: 120m
+  container:
+    image: anggit86/ubuntu:22.04
+    cpu: 8
+    memory: 32G
+
+  sync-recovery_script:
+    - mkdir -p SHRP && cd SHRP
+    - repo init --depth=1 --no-repo-verify -u $MANIFEST_URL -b $MANIFEST_BRANCH -g default,-mips,-darwin,-notdefault
+    - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+    - git clone --depth 1 $DEVICE_TREE_URL -b $DEVICE_TREE_BRANCH $DEVICE_PATH
+
+  build-recovery_script:
+    - cd SHRP
+    - export ALLOW_MISSING_DEPENDENCIES=true
+    - source build/envsetup.sh
+    - luch $MAKEFILE_NAME-eng
+    - make $BUILD_TARGETimage -j8
