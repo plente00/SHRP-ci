@@ -29,5 +29,5 @@ task:
     - cd SHRP
     - export ALLOW_MISSING_DEPENDENCIES=true
     - source build/envsetup.sh
-    - luch $MAKEFILE_NAME-eng
+    - luch ${MAKEFILE_NAME}-eng
     - make ${BUILD_TARGET}image -j8
