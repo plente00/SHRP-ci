@@ -1,8 +1,8 @@
 env:
   MANIFEST_URL: "https://github.com/SHRP/manifest.git"
-  MANIFEST_BRANCH: "v3_11.0"
-  DEVICE_TREE_URL: "https://github.com/AnGgIt88/device_xiaomi_rosy-twrp"
-  DEVICE_TREE_BRANCH: "android-9.0"
+  MANIFEST_BRANCH: "shrp-12.1"
+  DEVICE_TREE_URL: "https://github.com/AnGgIt88/recovery_device_xiaomi_rosy"
+  DEVICE_TREE_BRANCH: "twelve"
   DEVICE_PATH: "device/xiaomi/rosy"
   DEVICE_NAME: "rosy"
   MAKEFILE_NAME: "twrp_rosy"
@@ -30,4 +30,4 @@ task:
     - export ALLOW_MISSING_DEPENDENCIES=true
     - source build/envsetup.sh
     - luch $MAKEFILE_NAME-eng
-    - make $BUILD_TARGETimage -j8
+    - make ${BUILD_TARGET}image -j8
