@@ -36,7 +36,7 @@ task:
     - lunch ${MAKEFILE_NAME}-eng
     - make ${BUILD_TARGET}image -j8
 
-  upload-recovery_script
+  upload-recovery_script:
     - cd $WORKDIR/recoverybuild/out/target/product/$DEVICE_NAME
     - recoveryname=$(ls SHRP*-Unofficial*.zip)
     - recoverryaddons=$(ls SHRP_AddonRescue*.zip)
