@@ -29,5 +29,5 @@ task:
     - cd SHRP
     - export ALLOW_MISSING_DEPENDENCIES=true
     - source build/envsetup.sh
-    - luch twrp_rosy-eng
+    - lunch twrp_rosy-eng
     - make recoveryimage -j8
