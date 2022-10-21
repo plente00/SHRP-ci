@@ -1,4 +1,5 @@
 env:
+  RCLONECONFIG_DRIVE: "ENCRYPTED[8da5e332bd776e2aed19dfbaa57c86820b7fe6c4f3b185cccf0b13f140222c272127fcb5a520b5372f6eebbe53f0e86c]"
   MANIFEST_URL: "https://github.com/SHRP/manifest.git"
   MANIFEST_BRANCH: "shrp-12.1"
   DEVICE_TREE_URL: "https://github.com/AnGgIt88/recovery_device_xiaomi_rosy"
@@ -20,14 +21,24 @@ task:
     memory: 32G
 
   sync-recovery_script:
-    - mkdir -p SHRP && cd SHRP
+    - mkdir -p ~/.config/rclone
+    - echo "$RCLONECONFIG_DRIVE" > ~/.config/rclone/rclone.conf
+    - cd $WORKDIR
+    - mkdir -p recoverybuild && cd recoverybuild
     - repo init --depth=1 --no-repo-verify -u $MANIFEST_URL -b $MANIFEST_BRANCH -g default,-mips,-darwin,-notdefault
     - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
     - git clone --depth 1 $DEVICE_TREE_URL -b $DEVICE_TREE_BRANCH $DEVICE_PATH
 
   build-recovery_script:
-    - cd SHRP
+    - cd $WORKDIR/recoverybuild
     - export ALLOW_MISSING_DEPENDENCIES=true
     - source build/envsetup.sh
-    - lunch twrp_rosy-eng
-    - make recoveryimage -j8
+    - lunch ${MAKEFILE_NAME}-eng
+    - make ${BUILD_TARGET}image -j8
+
+  upload-recovery_script
+    - cd $WORKDIR/recoverybuild/out/target/product/$DEVICE_NAME
+    - recoveryname=$(ls SHRP*-Unofficial*.zip)
+    - recoverryaddons=$(ls SHRP_AddonRescue*.zip)
+    - rclone copy --drive-chunk-size 256M --stats 1s $recoveryname NFS:recovery/$DEVICE_NAME/twrp -P
+    - rclone copy --drive-chunk-size 256M --stats 1s $recoverryaddons NFS:recovery/$DEVICE_NAME/addons -P
