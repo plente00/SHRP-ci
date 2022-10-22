@@ -31,11 +31,11 @@ task:
     - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
     - git clone $DEVICE_TREE_URL -b $DEVICE_TREE_BRANCH $DEVICE_PATH
     - git clone --depth 1 https://github.com/baunilla/android_kernel_xiaomi_rosy -b lineage-20.0 kernel/xiaomi/rosy
+    - rm -rfd vendor/qcom/opensource/cryptfs_hw
     - cd $DEVICE_PATH && git fetch https://github.com/TeamWin/android_device_xiaomi_mithorium-common
     - git cherry-pick ffdb51f3706e3c86f8eecabde5972b890a07b196
     - git cherry-pick b06831f692abb4c999be0ad03a21f61b207651d5
     - git cherry-pick 318ffb8929b98a486a1d1149baf9a430726d9c87
-    - rm -rfd vendor/qcom/opensource/cryptfs_hw
 
   build-recovery_script:
     - cd $WORKDIR/recoverybuild
