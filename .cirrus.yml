@@ -2,7 +2,7 @@ env:
   RCLONECONFIG_DRIVE: "ENCRYPTED[8da5e332bd776e2aed19dfbaa57c86820b7fe6c4f3b185cccf0b13f140222c272127fcb5a520b5372f6eebbe53f0e86c]"
   MANIFEST_URL: "https://github.com/SHRP/manifest.git"
   MANIFEST_BRANCH: "v3_11.0"
-  DEVICE_TREE_URL: "https://github.com/baunilla/twrp_device_xiaomi_rosy"
+  DEVICE_TREE_URL: "https://github.com/AnGgIt88/shrp_device_xiaomi_rosy"
   DEVICE_TREE_BRANCH: "android-11"
   DEVICE_PATH: "device/xiaomi/rosy"
   DEVICE_NAME: "rosy"
@@ -34,7 +34,6 @@ task:
     - cd $WORKDIR/recoverybuild
     - export ALLOW_MISSING_DEPENDENCIES=true
     - source build/envsetup.sh
-    - export TARGET_CRYPTFS_HW_PATH=vendor/qcom/opensource/cryptfs_hw
     - lunch ${MAKEFILE_NAME}-eng
     - mka ${BUILD_TARGET}image -j8
 
