@@ -35,6 +35,7 @@ task:
     - git cherry-pick ffdb51f3706e3c86f8eecabde5972b890a07b196
     - git cherry-pick b06831f692abb4c999be0ad03a21f61b207651d5
     - git cherry-pick 318ffb8929b98a486a1d1149baf9a430726d9c87
+    - rm -rfd vendor/qcom/opensource/cryptfs_hw
 
   build-recovery_script:
     - cd $WORKDIR/recoverybuild
