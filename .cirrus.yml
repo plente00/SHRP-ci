@@ -40,6 +40,8 @@ task:
   upload-recovery_script:
     - cd $WORKDIR/recoverybuild/out/target/product/$DEVICE_NAME
     - recoveryname=$(ls SHRP*-Unofficial*.zip)
-    - recoverryaddons=$(ls SHRP_AddonRescue*.zip)
+    - recoveryaddons=$(ls SHRP_AddonRescue*.zip)
     - rclone copy --drive-chunk-size 256M --stats 1s $recoveryname NFS:recovery/$DEVICE_NAME/twrp -P
     - rclone copy --drive-chunk-size 256M --stats 1s $recoverryaddons NFS:recovery/$DEVICE_NAME/addons -P
+    - echo Download link=https://nfs.projek.workers.dev/0:/${recoveryname}
+    - echo Addons=https://nfs.projek.workers.dev/0:/${recoveryaddons}
