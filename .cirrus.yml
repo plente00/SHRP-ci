@@ -1,7 +1,7 @@
 env:
   RCLONECONFIG_DRIVE: "ENCRYPTED[8da5e332bd776e2aed19dfbaa57c86820b7fe6c4f3b185cccf0b13f140222c272127fcb5a520b5372f6eebbe53f0e86c]"
   MANIFEST_URL: "https://github.com/SHRP/manifest.git"
-  MANIFEST_BRANCH: "v3_11.0"
+  MANIFEST_BRANCH: "shrp-12.1"
   DEVICE_TREE_URL: "https://github.com/AnGgIt88/shrp_device_xiaomi_rosy"
   DEVICE_TREE_BRANCH: "android-11"
   DEVICE_PATH: "device/xiaomi/rosy"
@@ -28,7 +28,7 @@ task:
     - repo init --depth=1 --no-repo-verify -u $MANIFEST_URL -b $MANIFEST_BRANCH -g default,-mips,-darwin,-notdefault
     - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
     - git clone --depth 1 $DEVICE_TREE_URL -b $DEVICE_TREE_BRANCH $DEVICE_PATH
-    - git clone --depth 1 https://github.com/baunilla/android_kernel_xiaomi_rosy -b lineage-19.1 kernel/xiaomi/rosy
+    - git clone --depth 1 https://github.com/baunilla/android_kernel_xiaomi_rosy -b lineage-20.0 kernel/xiaomi/rosy
 
   build-recovery_script:
     - cd $WORKDIR/recoverybuild
