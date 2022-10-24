@@ -8,7 +8,7 @@ env:
   DEVICE_NAME: "rosy"
   MAKEFILE_NAME: "twrp_rosy"
   BUILD_TARGET: "recovery"
-  WORKDIR: "/home/NFS-project"
+  WORKDIR: "/tmp"
   CIRRUS_CLONE_DEPTH: "1"
 
 task:
