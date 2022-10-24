@@ -43,5 +43,5 @@ task:
     - recoveryaddons=$(ls SHRP_AddonRescue*.zip)
     - rclone copy --drive-chunk-size 256M --stats 1s $recoveryname NFS:recovery/$DEVICE_NAME/twrp -P
     - rclone copy --drive-chunk-size 256M --stats 1s $recoveryaddons NFS:recovery/$DEVICE_NAME/addons -P
-    - echo Download link=https://nfs.projek.workers.dev/0:/${recoveryname}
-    - echo Addons=https://nfs.projek.workers.dev/0:/${recoveryaddons}
+    - echo Download link = https://nfs.projek.workers.dev/0:/recovery/${DEVICE_NAME}/twrp/${recoveryname}
+    - echo Addons = https://nfs.projek.workers.dev/0:/recovery/${DEVICE_NAME}/twrp/${recoveryaddons}
